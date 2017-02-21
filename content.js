@@ -236,38 +236,6 @@ chrome.runtime.onMessage.addListener(
 					}
 				}
 			}
-				
-				
-				/*
-				//}
-				// Moving down
-				if(computeScrollPercentage(navigation, currSiteTable) > 1.0 && !(isLastSiteTable())) {
-					var toSiteTable = rootComments[currSiteTableInd+1];
-					moveNavigation(currSiteTable, toSiteTable)	// there is indeed another comment to move down to
-					currSiteTableInd++;
-					currSiteTable = rootComments[currSiteTableInd];
-					console.log("Current Site Table Top Offset: " + currSiteTable.style.marginTop);
-					currentStart = $(currSiteTable).offset().top;
-					console.log("Margin Top: " + navigation.style.marginTop);
-					console.log("Nav Top : " + navigation.style.top);
-					//changed = true;
-					$(navigation).css("cssText", "margin-top: 0px !important");
-					navigation.style.float = 'right';
-				} else if(computeScrollPercentage(navigation, currSiteTable) < (0.0 + $(navigation).height() / $(currSiteTable).height())  && !(isFirstSiteTable())) {	// Moving up
-					var toSiteTable = rootComments[currSiteTableInd-1];
-					moveNavigation(currSiteTable, toSiteTable);
-					currSiteTableInd--;
-					currSiteTable = rootComments[currSiteTableInd];
-					currentStart = $(currSiteTable).offset().top;
-					$(navigation).css("margin-top", $(window).scrollTop() + currentStart + 93);
-				} else {
-
-				}
-				//$(navigation).stop().animate({"marginTop" : $(window).scrollTop() - currentStart +65}, "slow");
-				//else {	// Move within
-					//currentStart = $(currSiteTable).offset().top;
-					//$(navigation).stop().animate({"marginTop" : $(window).scrollTop() - currentStart +65}, "slow");
-				//}**/
 		}
 		
 	}
