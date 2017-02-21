@@ -1,0 +1,12 @@
+{
+	"name": "browser-viewport",
+	"description": "The missing viewport for JavaScript. This cross browser class requires no outside dependencies and gives you an easy way to interact with and interrogate the browser viewport.",
+	"version": "1.0.0",
+	"homepage": "https://github.com/gburghardt/viewport",
+	"authors": [
+		"Greg Burghardt <greg_burghardt@yahoo.com>"
+	],
+	"license": "MIT",
+	"repository": { "type": "git", "url": "https://github.com/gburghardt/viewport.git" },
+	"main": "src/Viewport.js"
+}

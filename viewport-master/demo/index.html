@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Demo: Viewport</title>
+	<style type="text/css">
+		html {
+			height: 100%;
+		}
+		body {
+			height: 200%;
+			width: 200%;
+		}
+		#bar {
+			background-color: #f0fff0;
+			border: 1px solid #0c0;
+			border-top-width: 0;
+			border-bottom-left-radius: 12px;
+			border-bottom-right-radius: 12px;
+			left: 50%;
+			line-height: 32px;
+			margin: 0 0 0 -250px;
+			position: fixed;
+			text-align: center;
+			top: 0;
+			width: 500px;
+		}
+		p.find-me {
+			background-color: #f0f0f0;
+			border: 3px solid #d0d0d0;
+			border-radius: 12px;
+			float: left;
+			line-height: 194px;
+			margin: 14px 14px 0 0;
+			text-align: center;
+			width: 194px;
+		}
+		p.found-me {
+			background-color: #3c3;
+			border-color: #060;
+		}
+	</style>
+	<script type="text/javascript" src="../dist/browser-viewport.min.js"></script>
+	<script type="text/javascript">
+		var viewport = new Viewport(window);
+
+		document.documentElement.addEventListener("click", function(event) {
+			if (event.target.nodeName !== "BUTTON") {
+				return;
+			}
+
+			var button = event.target,
+			    type = button.value,
+			    bound = !!button.getAttribute("data-bound"),
+			    listener = type === "scroll:complete"
+			             ? handleViewportScrollComplete
+			             : handleViewportResized;
+
+			if (bound) {
+				viewport.removeEventListener(type, listener);
+				button.removeAttribute("data-bound");
+				button.innerHTML = button.innerHTML.replace("Remove", "Add");
+			}
+			else {
+				viewport.addEventListener(type, listener);
+				button.setAttribute("data-bound", "true");
+				button.innerHTML = button.innerHTML.replace("Add", "Remove");
+			}
+		}, false);
+
+		function handleViewportResized(viewport) {
+			viewport.querySelectorAll("p.find-me", function(p) {
+				p.style.fontWeight = "bold";
+				p.style.fontSize = "24px";
+			});
+		}
+
+		function handleViewportScrollComplete(viewport) {
+			viewport.querySelectorAll("p.find-me", function(p) {
+				if (p.className.indexOf("found-me") === -1)
+					p.className += " found-me";
+			});
+		}
+	</script>
+</head>
+<body>
+
+	<h1 style="margin-top: 44px;">Viewport</h1>
+
+	<p>Open the browse console and click the buttons to attach and detach event handlers to the viewport. Scroll around, resize the window. See what happens.</p>
+
+	<p>Type <code>viewport</code> into the console to inspect this object.</p>
+
+	<p id="bar">
+		<button type="button" value="scroll:complete">Add scroll:complete</button>
+		<button type="button" value="resize:complete">Add resize:complete</button>
+	</p>
+
+	<div style="width: 200%;">
+		<script type="text/javascript">
+			for (var i = 0; i < 500; i++) {
+				document.write('<p class="find-me">' + i + '</p>');
+			}
+		</script>
+	</div>
+
+</body>
+</html>

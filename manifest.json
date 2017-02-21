@@ -1,0 +1,30 @@
+{
+	"manifest_version" : 2,
+	"name" : "Straight To The Top",
+	"version" : "1.0.0",
+	"description" : "Jumps to the next or previous top comment in a Reddit comment thread",
+	"browser_action" : {
+		"default_icon" : "snoo.png"
+	}, 
+	"permissions" : [
+		"*://www.reddit.com/r/*/comments/*"
+	], 
+	"content_scripts" : [
+		{
+			"matches" : [
+				"*://www.reddit.com/r/*/comments/*"
+			],
+			"css" : [
+				"/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.css"
+			],
+			"js" : ["jquery-3.1.1.min.js", "content.js", "lodash.js", "/viewport-master/dist/browser-viewport.min.js", "/viewport-master/dist/Viewport.js", "/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.js", "/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"]
+		}
+	],
+	"background" : {
+		"scripts" : ["background.js"]
+	},
+	"web_accessible_resources" : [
+		"up-arrow.png",
+		"down-arrow.png"
+	]
+}
