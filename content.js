@@ -41,6 +41,7 @@ chrome.runtime.onMessage.addListener(
 				}
 			}
 			
+			// Automate scroll on navigation button event
 			$.fn.scrollView = function (clientHeight) {
 				return this.each(function () {
 					$('html, body').animate({
@@ -80,41 +81,6 @@ chrome.runtime.onMessage.addListener(
 				toParent.insertBefore(navigation, toParent.children[0]);
 			}
 			
-			function createLineElement(x, y, length, angle) {
-				var line = document.createElement("div");
-				var styles = 'border: 1px solid black; '
-						   + 'width: ' + length + 'px; '
-						   + 'height: 0px; '
-						   + '-moz-transform: rotate(' + angle + 'rad); '
-						   + '-webkit-transform: rotate(' + angle + 'rad); '
-						   + '-o-transform: rotate(' + angle + 'rad); '  
-						   + '-ms-transform: rotate(' + angle + 'rad); '  
-						   + 'position: absolute; '
-						   + 'top: ' + y + 'px; '
-						   + 'left: ' + x + 'px; ';
-				line.setAttribute('style', styles);  
-				return line;
-			}
-
-			function createLine(x1, y1, x2, y2) {
-				var a = x1 - x2,
-					b = y1 - y2,
-					c = Math.sqrt(a * a + b * b);
-
-				var sx = (x1 + x2) / 2,
-					sy = (y1 + y2) / 2;
-
-				var x = sx - c / 2,
-					y = sy;
-
-				var alpha = Math.PI - Math.atan2(-b, a);
-
-				return createLineElement(x, y, c, alpha);
-			}
-			
-			
-			//var intersection = findIntersection(rootComments, visibleComments);
-			//currSiteTable = intersection[0];
 			var currSiteTableInd = findIntersection(rootComments, visibleComments);
 			var currSiteTable = rootComments[currSiteTableInd];
 						
@@ -124,18 +90,13 @@ chrome.runtime.onMessage.addListener(
 			up = '<button type="button" id="up" class="btn btn-primary" style="font-size:20px"> <img src=\"'  + chrome.extension.getURL("up-arrow.png") + '\"/></button>';
 			down = '<button type="button" id ="down" class="btn btn-primary" style="font-size:20px"> <img src=\"' + chrome.extension.getURL("down-arrow.png") + '\"/</button>';
 			navigation.style.fontSize = "40px";
-			imgSrc = '<img src="up-arrow.png"/>';
-			console.log(chrome.extension.getURL("up-arrow.png"));
 			
 			navigation.innerHTML = up + down;
 			rootComments[currSiteTableInd].insertBefore(navigation, rootComments[currSiteTableInd].children[0]);
-			//rootComments[currSiteTableInd].insertBefore(pic, rootComments[currSiteTableInd].children[0]);
-			//$(navigation).animate({"marginTop" : $(window).scrollTop()});
 			var changed = false;
 			var commentArea = viewport.querySelectorAll(".commentarea");
 			var userScroll = true;
 			
-			//viewport.addEventListener("scroll:complete", function(viewport, event) {
 			// Moving within
 			$('.btn').click(function () {
 				var id = ($(this).attr('id'));
@@ -148,7 +109,6 @@ chrome.runtime.onMessage.addListener(
 					currSiteTable = rootComments[currSiteTableInd];
 					currentStart = $(currSiteTable).offset().top;
 					
-					//$(navigation).css("top", "0px");
 					$(navigation).css("margin-top", "0px");
 					$(this).scrollView($(this.clientHeight)[0]);
 					
@@ -163,8 +123,7 @@ chrome.runtime.onMessage.addListener(
 					currSiteTable = rootComments[currSiteTableInd];
 					currentStart = $(currSiteTable).offset().top;
 					
-					$(navigation).css("top", "0px");
-					$(navigation).css("marginTop", "0px");
+					$(navigation).css("margin-top", "0px");
 					$(this).scrollView($(this.clientHeight)[0]);
 					
 					if(isFirstSiteTable()) {
