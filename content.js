@@ -180,19 +180,7 @@ chrome.runtime.onMessage.addListener(
 					userScroll = true;
 					return;
 				}
-				/**
-				if(changed){
-					console.log("Current Site Table Margin Top: " + $(currSiteTable).offset().top);
-					console.log("Current Navigation Margin Top: " + navigation.style.marginTop);
-					return;
-				}
-				// Move down
-				currentStart = $(currSiteTable).offset().top;
-				/**
-				if($(window).scrollTop() < currentStart) {	// attempt to scroll too far up
-					//computeScrollPercentage(navigation, currSiteTable);
-					$(navigation).stop().animate({"marginTop" : "0px"}, "slow");4
-				} else {**/
+				
 				var scrollDirection = getScrollDirection();
 				currentStart = $(currSiteTable).offset().top;
 				var bottom = $(currSiteTable).height() + currentStart;
@@ -247,43 +235,6 @@ chrome.runtime.onMessage.addListener(
 						}
 					}
 				}
-				/**
-				if(viewport.contains(currSiteTable)) {
-					if(scrollDirection == "down") {	// scrolling down, current site table still in viewport
-						var nextScrollPos = $(navigation).offset().top + 93;
-						if(nextScrollPos > bottom || $(window).scrollTop() < currentStart) {	// attempting to scroll outside of site table
-							document.body.appendChild(createLineElement(0, bottom - 93, 500, 3.14));
-							//$(navigation).css("margin-top", bottom - 93);
-						} else {
-							$(navigation).stop().animate({"marginTop" : $(window).scrollTop() - currentStart + 93}, "slow");
-						}
-					} else{	// scrolling up, current site table still in viewport
-						var scrollBottom = $(window).scrollTop() + $(window).height();
-					}
-					//if(isFirstSiteTable() && ($(window).scrollTop() < currentStart)) {
-						//$(navigation).stop().animate({"marginTop" : "0px"}, "slow");	
-					//} //else if (!(changed)){
-						//$(navigation).stop().animate({"marginTop" : $(window).scrollTop() - currentStart +93}, "slow");	
-					//}
-				} else {
-					if(scrollDirection == "down" && !(isLastSiteTable())) {
-						var toSiteTable = rootComments[currSiteTableInd + 1];
-						moveNavigation(currSiteTable, toSiteTable);
-						currSiteTableInd++;
-						currSiteTable = rootComments[currSiteTableInd];
-						currentStart = $(currSiteTable).offset().top;
-						$(navigation).css("cssText", "margin-top: 0px !important");
-						navigation.style.float = 'right';
-					} 
-					if(scrollDirection == "up" && !(isFirstSiteTable())) {
-						var toSiteTable = rootComments[currSiteTableInd - 1];
-						moveNavigation(currSiteTable, toSiteTable);
-						currSiteTableInd--;
-						currSiteTable = rootComments[currSiteTableInd];
-						currentStart = $(currSiteTable).offset().top;
-						$(navigation).css("margin-top", $(window).scrollTop() + currentStart + 93);
-					}
-				}**/
 			}
 				
 				
